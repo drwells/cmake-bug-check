@@ -1,0 +1,17 @@
+SET(_src quick.cc)
+
+ADD_LIBRARY(obj_quick OBJECT ${_src} ${CMAKE_SOURCE_DIR}/include/checkbug/quick/quick.h)
+
+SET_TARGET_PROPERTIES(obj_quick PROPERTIES LINKER_LANGUAGE "CXX")
+
+SET(_flags "")
+SEPARATE_ARGUMENTS(_flags)
+TARGET_COMPILE_OPTIONS(obj_quick PUBLIC
+  $<$<COMPILE_LANGUAGE:CXX>:${_flags}>
+  )
+
+TARGET_COMPILE_DEFINITIONS(obj_quick
+  PUBLIC "" "")
+
+SET_PROPERTY(GLOBAL APPEND PROPERTY CHECKBUG_OBJECTS
+  "$<TARGET_OBJECTS:obj_quick>")
